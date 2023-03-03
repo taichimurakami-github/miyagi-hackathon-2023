@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Secret local data
+*.tgz
+*secrets.json
+
+# Firebase cache
+.firebase/
