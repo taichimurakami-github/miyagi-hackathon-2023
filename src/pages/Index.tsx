@@ -1,13 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { TwinButtonsContainer } from "../components/ui/TwinButtonsContainer";
 
 export default function Index() {
   return (
-    <div>
-      <h1>INDEX</h1>
-      <Link to="/page1">Page1へ</Link>
-      <Link to="/page2">Page2へ</Link>
-      <Link to="/page3">Page3へ</Link>
+    <div className="grid gap-10">
+      <h1>
+        青翠のまじんこ<br></br>Sample Demo
+      </h1>
+
+      <div className="grid gap-4 text-xl">
+        <Link to="/reservation">予約する</Link>
+        <Link to="/spotauth">本人確認する</Link>
+      </div>
     </div>
   );
 }
