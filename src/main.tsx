@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import "./index.scss";
 import AppContainer from "./AppContainer";
 import { createSDKInstance } from "@pocketsign/in-app-service-sdk";
 import sdkSecrets from "../sdk-secrets.json";

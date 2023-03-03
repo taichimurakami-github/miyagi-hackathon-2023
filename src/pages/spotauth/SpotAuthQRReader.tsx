@@ -23,8 +23,12 @@ export default function SpotAuthQRReader(props: {
     <div>
       <QREncoder onLoaded={handleLoadedData} />
       <TwinButtonsContainer>
-        <button onClick={props.onHandleGoBack}>入力に戻る</button>
-        <button onClick={props.onHandleGoNext}>確認画面へ進む</button>
+        <button className="type-b-reverse" onClick={props.onHandleGoBack}>
+          入力に戻る
+        </button>
+        <button className="type-b" onClick={props.onHandleGoNext}>
+          確認画面へ進む
+        </button>
       </TwinButtonsContainer>
     </div>
   );

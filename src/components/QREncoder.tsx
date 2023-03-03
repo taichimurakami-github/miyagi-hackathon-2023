@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import jsQR from "jsqr";
-import QRCode from "react-qr-code";
+// import QRCode from "react-qr-code";
 
 export default function QREncoder(props: {
   onLoaded: (value: string) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const msgRef = useRef<HTMLDivElement>(null);
-  const qrcodeRef = useRef<HTMLDivElement>(null);
+  // const qrcodeRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(document.createElement("video"));
 
   // const [qrValue, setQrValue] = useState<null | string>(null);
@@ -95,9 +95,11 @@ export default function QREncoder(props: {
   };
 
   return (
-    <div>
-      <h1 className="mb-10">QRコードを読み取ってください．</h1>
-      <div id="wrapper">
+    <div className="grid gap-10 mb-10">
+      <h1>
+        QRコードを<br></br>読み取ってください
+      </h1>
+      <div className="grid gap-4">
         <div id="msg" ref={msgRef}>
           {!showCanvas ? (
             <>
@@ -105,18 +107,23 @@ export default function QREncoder(props: {
               <p>カメラの使用を許可してください。</p>
             </>
           ) : (
-            <p>Detecting QR-Code...</p>
+            <p>QRコードを探しています...</p>
           )}
         </div>
+        <button className="type-a mb-10" onClick={drawImagesFromMediaDevice}>
+          カメラをONにする
+        </button>
         <canvas
           id="canvas"
-          className="mx-auto"
+          className="mx-auto w-full"
           ref={canvasRef}
-          style={{ visibility: showCanvas ? "visible" : "hidden" }}
+          style={{
+            visibility: showCanvas ? "visible" : "hidden",
+            width: window.innerWidth * 0.9 * 0.9,
+          }}
         ></canvas>
-        <div id="qrcode" ref={qrcodeRef}></div>
+        {/* <div id="qrcode" ref={qrcodeRef}></div> */}
         {/* {qrValue && <QRCode value={qrValue} size={512} />} */}
-        <button onClick={drawImagesFromMediaDevice}>Start</button>
       </div>
     </div>
   );

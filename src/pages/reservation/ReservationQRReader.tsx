@@ -19,12 +19,15 @@ export default function ReservationQRReader(props: {
   };
 
   return (
-    <div>
-      ReservationQRReader
+    <div className="grid gap-10">
       <QREncoder onLoaded={handleLoadedData} />
       <TwinButtonsContainer>
-        <button onClick={props.onHandleGoBack}>戻る</button>
-        <button onClick={props.onHandleGoNext}>次へ</button>
+        <button className="type-b-reverse" onClick={props.onHandleGoBack}>
+          戻る
+        </button>
+        <button className="type-b" onClick={props.onHandleGoNext}>
+          次へ
+        </button>
       </TwinButtonsContainer>
     </div>
   );

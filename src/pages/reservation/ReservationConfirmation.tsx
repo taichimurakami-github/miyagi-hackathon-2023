@@ -4,6 +4,7 @@ import { usePocketSignSDKInstanceCtx } from "../../hooks/useAppCtx";
 import usePocketSignSDK from "../../hooks/usePocketSignSDK";
 import useMajinkoAPI from "../../hooks/useMajinkoAPI";
 import { AppFormData, AppUserData } from "../../types/data";
+import { DataShowcaseContainer } from "../../components/ui/DataShowcaseContainer";
 
 export default function ReservationConfirmation(props: {
   ownerId: string;
@@ -70,39 +71,72 @@ export default function ReservationConfirmation(props: {
   }, []);
 
   return (
-    <div className="text-lg">
+    <div className="text-lg grid gap-10">
       <h2>以下の情報で予約を確定します。よろしいですか？</h2>
       <div className="grid gap-4">
-        <div>
-          <p>clientId</p>
-          <p className="font-bold">{props.ownerId}</p>
-        </div>
+        <DataShowcaseContainer>
+          <div className="form-table-cell">
+            <p className="text-sm">オーナー</p>
+            <p className="font-bold">青翠のまじんこ</p>
+            {/* <p className="font-bold">{props.ownerId}</p> */}
+          </div>
+        </DataShowcaseContainer>
 
-        <div className="w-full h-[10px] bg-black my-20"></div>
+        <DataShowcaseContainer>
+          {/* {Object.entries(props.userData).map((v, i) => {
+            return (
+              <div>
+                <p>{v[0]}: </p>
+                <p className="font-bold">{v[1]}</p>
+              </div>
+            );
+          })} */}
+          <div className="form-table-cell">
+            <p className="text-sm">名前</p>
+            {/* <p className="font-bold">{props.userData.name}</p> */}
+            <p className="font-bold">村上大知</p>
+          </div>
 
-        {Object.entries(props.userData).map((v, i) => {
-          return (
-            <div>
-              <p>{v[0]}: </p>
-              <p className="font-bold">{v[1]}</p>
-            </div>
-          );
-        })}
+          <div className="form-table-cell">
+            <p className="text-sm">生年月日</p>
+            {/* <p className="font-bold">{props.userData.name}</p> */}
+            <p className="font-bold">1999年8月17日</p>
+          </div>
 
-        <div className="w-full h-[10px] bg-black my-20"></div>
+          <div className="form-table-cell">
+            <p className="text-sm">性別</p>
+            <p className="font-bold text-xl">
+              {props.userData.sex === "male" ? "男性" : "女性"}
+            </p>
+          </div>
 
-        {Object.entries(props.formData).map((v, i) => {
-          return (
-            <div>
-              <p>{v[0]}: </p>
-              <p className="font-bold">{v[1]}</p>
-            </div>
-          );
-        })}
+          <div className="form-table-cell">
+            <p className="text-sm">住所</p>
+            {/* <p className="font-bold">{props.userData.address}</p> */}
+            <p className="font-bold text-md">
+              宮城県仙台市青葉区川内澱橋通5-1 フォレストヒル仙台青葉3４１号
+            </p>
+          </div>
+        </DataShowcaseContainer>
+
+        <DataShowcaseContainer>
+          {/* {Object.entries(props.formData).map((v, i) => {
+            return (
+              <div>
+                <p>{v[0]}: </p>
+                <p className="font-bold">{v[1]}</p>
+              </div>
+            );
+          })} */}
+        </DataShowcaseContainer>
       </div>
       <TwinButtonsContainer>
-        <button onClick={props.onHandleGoBack}>入力に戻る</button>
-        <button onClick={handleReserve}>予約を完了する</button>
+        <button className="type-b-reverse" onClick={props.onHandleGoBack}>
+          戻る
+        </button>
+        <button className="type-b" onClick={handleReserve}>
+          予約する
+        </button>
       </TwinButtonsContainer>
     </div>
   );

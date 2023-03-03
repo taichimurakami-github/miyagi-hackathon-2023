@@ -14,29 +14,37 @@ export default function SpotAuthSignUp(props: {
   } = useForm();
 
   const onHandleSubmit = async () => {
-    props.onHandleGoNext();
+    console.log(watch());
+    if (watch().pincode.length > 3) {
+      props.onHandleGoNext();
+    }
   };
 
   return (
     <div className="grid gap-10">
       <form onSubmit={handleSubmit(onHandleSubmit)}>
-        <label className="grid gap-4">
-          マイナンバーカードの暗証番号（4桁）を入力してください
+        <label className="grid gap-10">
+          マイナンバーカードの暗証番号（4桁）を<br></br>入力してください
           <input
-            {...register("exampleRequired", { required: true })}
-            placeholder="マイナンバーカードの暗証番号（4桁）を入力してください"
+            className="w-[250px] text-3xl bg-app-brown rounded-md p-2 mx-auto text-white text-center"
+            {...register("pincode", { required: true })}
+            placeholder="半角英数字4桁"
           />
         </label>
 
-        {errors.exampleRequired && (
+        {errors.pincode && (
           <span className="text-red-600 font-bold text-xl">
-            PINを入力してください
+            PINコードを入力してください
           </span>
         )}
       </form>
       <TwinButtonsContainer>
-        <button onClick={props.onHandleGoBack}>戻る</button>
-        <button onClick={props.onHandleGoNext}>認証を行う</button>
+        <button className="type-b-reverse" onClick={props.onHandleGoBack}>
+          戻る
+        </button>
+        <button type="submit" className="type-b" onClick={onHandleSubmit}>
+          認証を行う
+        </button>
       </TwinButtonsContainer>
     </div>
   );

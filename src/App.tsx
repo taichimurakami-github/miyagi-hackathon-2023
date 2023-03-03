@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./App.css";
+// import "./App.css";
 import { createBrowserRouter } from "react-router-dom";
 
 import Index from "./pages/Index";
@@ -31,8 +31,10 @@ function App() {
   const v = usePocketSignSDKInstanceCtx();
   console.log(v);
   return (
-    <div className="App">
-      <RouterProvider router={createBrowserRouter(APP_ROUTES)} />
+    <div className="App w-screen text-center text-black">
+      <div className="w-[85%] mx-auto">
+        <RouterProvider router={createBrowserRouter(APP_ROUTES)} />
+      </div>
     </div>
   );
 }

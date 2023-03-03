@@ -41,9 +41,14 @@ export default function SpotAuthCompletion(props: {
       console.log("result:");
       console.log(res);
 
-      400 <= res.statusCode && res.statusCode < 500
-        ? setError(JSON.stringify(res))
-        : setData(JSON.stringify(res));
+      if (
+        Object.hasOwn(res, "errorMessage") ||
+        (400 <= res.statusCode && res.statusCode < 500)
+      ) {
+        setError(JSON.stringify(res));
+      } else {
+        setData(JSON.stringify(res));
+      }
     })();
   }, []);
 
@@ -63,16 +68,20 @@ export default function SpotAuthCompletion(props: {
     return (
       <div className="grid gap-10">
         認証に成功しました！
-        <button onClick={props.onHandleGoToTop}>トップに戻る</button>
+        <button className="type-b" onClick={props.onHandleGoToTop}>
+          トップに戻る
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-10">
+    <div className="grid gap-10 w-full">
       認証に失敗しました：
       {JSON.stringify(error)}
-      <button onClick={props.onHandleGoToTop}>トップに戻る</button>
+      <button className="type-b" onClick={props.onHandleGoToTop}>
+        トップに戻る
+      </button>
     </div>
   );
 }
