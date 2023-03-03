@@ -9,12 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@pocketsign/in-app-service-sdk": "file:pocketsign-in-app-service-sdk-0.2.0.tgz",
     "jsqr": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-qr-code": "^2.0.11",
     "react-router": "^6.8.2",
-    "@pocketsign/in-app-service-sdk": "file:pocketsign-in-app-service-sdk-0.2.0.tgz"
+    "react-router-dom": "^6.8.2"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
