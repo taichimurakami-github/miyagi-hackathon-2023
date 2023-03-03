@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { TwinButtonsContainer } from "../components/ui/TwinButtonsContainer";
 
 export default function Index() {
   return (
