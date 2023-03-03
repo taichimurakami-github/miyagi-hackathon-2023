@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="App">
-      <QREncoder />
+      <QREncoder onLoaded={(v) => console.log(v)} />
     </div>
   );
 }

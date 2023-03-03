@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import jsQR from "jsqr";
 import QRCode from "react-qr-code";
 
-export default function QREncoder() {
+export default function QREncoder(props: {
+  onLoaded: (value: string) => void;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const msgRef = useRef<HTMLDivElement>(null);
   const qrcodeRef = useRef<HTMLDivElement>(null);
