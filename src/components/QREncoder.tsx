@@ -104,6 +104,7 @@ export default function QREncoder(props: {
             ? "qr code detected."
             : "Detecting QR-Code..."}
         </div>
+        {qrValue && <p>{qrValue}</p>}
         <canvas
           id="canvas"
           ref={canvasRef}
