@@ -1,16 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
-import QREncoder from "./components/QREncoder";
 import { createSDKInstance } from "@pocketsign/in-app-service-sdk";
 import sdkSecrets from "../sdk-secrets.json";
-import PocketsignSDKExample from "./components/PocketsignSDKExample";
-import MajinkoAPIExample from "./components/MajinkoAPIExample";
 import { createBrowserRouter } from "react-router-dom";
 
 import Index from "./pages/Index";
 import { RouterProvider } from "react-router";
-import SpotAuth from "./pages/SpotAuth";
-import Reservation from "./pages/Reservation";
+import SpotAuthIndex from "./pages/SpotAuthIndex";
+import Reservation from "./pages/ReservationIndex";
 
 export const APP_ROUTES = [
   {
@@ -19,12 +16,12 @@ export const APP_ROUTES = [
     element: <Index />,
   },
   {
-    path: "/Reservation",
+    path: "/reservation/",
     element: <Reservation />,
   },
   {
-    path: "/SpotAuth",
-    element: <SpotAuth />,
+    path: "/spotauth/",
+    element: <SpotAuthIndex />,
   },
 ];
 
@@ -53,9 +50,6 @@ function App() {
 
   return (
     <div className="App">
-      <MajinkoAPIExample />
-      <PocketsignSDKExample sdkInstance={sdkInstance.current} />
-      <QREncoder onLoaded={(v) => alert(v)} />
       <RouterProvider router={createBrowserRouter(APP_ROUTES)} />
     </div>
   );
