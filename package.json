@@ -9,11 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@mui/material": "^5.11.11",
     "@pocketsign/in-app-service-sdk": "file:pocketsign-in-app-service-sdk-0.2.0.tgz",
     "jsqr": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.3",
     "react-qr-code": "^2.0.11",
     "react-router": "^6.8.2",
     "react-router-dom": "^6.8.2",

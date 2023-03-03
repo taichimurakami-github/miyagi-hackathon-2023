@@ -10,7 +10,7 @@ export default function QREncoder(props: {
   const qrcodeRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(document.createElement("video"));
 
-  const [qrValue, setQrValue] = useState<null | string>(null);
+  // const [qrValue, setQrValue] = useState<null | string>(null);
   const detecting = useRef(false);
   const [showCanvas, setShowCanvas] = useState(false);
 
@@ -63,9 +63,9 @@ export default function QREncoder(props: {
       return;
     }
 
-    if (qrValue) {
-      return;
-    }
+    // if (qrValue) {
+    //   return;
+    // }
 
     const ctx = c.getContext("2d");
 
@@ -85,34 +85,38 @@ export default function QREncoder(props: {
 
           drawRect(code.location); // Rect
           m.innerText = code.data; // Data
-          setQrValue(code.data);
+          // setQrValue(code.data);
+          props.onLoaded(code.data);
         }
       }
     }
 
-    !qrValue && detecting.current && setTimeout(startTick, 20);
+    detecting.current && setTimeout(startTick, 20);
   };
 
   return (
     <div>
-      <h1>jsQR</h1>
+      <h1 className="mb-10">QRコードを読み取ってください．</h1>
       <div id="wrapper">
         <div id="msg" ref={msgRef}>
-          {!showCanvas
-            ? "Unable to access video stream."
-            : qrValue
-            ? "qr code detected."
-            : "Detecting QR-Code..."}
+          {!showCanvas ? (
+            <>
+              <p>「カメラをONにする」ボタンを押して、</p>
+              <p>カメラの使用を許可してください。</p>
+            </>
+          ) : (
+            <p>Detecting QR-Code...</p>
+          )}
         </div>
-        {qrValue && <p>{qrValue}</p>}
         <canvas
           id="canvas"
+          className="mx-auto"
           ref={canvasRef}
           style={{ visibility: showCanvas ? "visible" : "hidden" }}
         ></canvas>
         <div id="qrcode" ref={qrcodeRef}></div>
-        {qrValue && <QRCode value={qrValue} size={512} />}
-        <button onClick={drawImagesFromMediaDevice}>start media device</button>
+        {/* {qrValue && <QRCode value={qrValue} size={512} />} */}
+        <button onClick={drawImagesFromMediaDevice}>Start</button>
       </div>
     </div>
   );
