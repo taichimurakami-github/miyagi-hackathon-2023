@@ -1,20 +1,23 @@
 import { PropsWithChildren, createContext, useState } from "react";
 
-//@ts-ignore
-export const AppCommonCtx = createContext();
+export type AppCommonData = {
+  reservation: {
+    done: boolean;
+    data: { [key: string]: any };
+  };
+  spotauth: {
+    done: boolean;
+  };
+};
 
-export default function PocketSignSDKInstanceCtxProvider(
-  props: PropsWithChildren
-) {
-  const [appCommonData, setAppCommonData] = useState<{
-    reservation: {
-      done: boolean;
-      data: { [key: string]: any };
-    };
-    spotauth: {
-      done: boolean;
-    };
-  }>({
+//@ts-ignore
+export const AppCommonCtx = createContext<{
+  appCommonData: AppCommonData;
+  setAppCommonData: React.Dispatch<React.SetStateAction<AppCommonData>>;
+}>();
+
+export default function AppCommonCtxProvider(props: PropsWithChildren) {
+  const [appCommonData, setAppCommonData] = useState<AppCommonData>({
     reservation: {
       done: false,
       data: {},

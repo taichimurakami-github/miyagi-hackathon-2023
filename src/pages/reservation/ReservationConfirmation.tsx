@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { TwinButtonsContainer } from "../../components/ui/ButtonsContainer";
-import { usePocketSignSDKInstanceCtx } from "../../hooks/useAppCtx";
+import {
+  useAppCommonCtx,
+  usePocketSignSDKInstanceCtx,
+} from "../../hooks/useAppCtx";
 import usePocketSignSDK from "../../hooks/usePocketSignSDK";
 import useMajinkoAPI from "../../hooks/useMajinkoAPI";
 import { AppFormData, AppUserData } from "../../types/data";
@@ -14,27 +17,25 @@ export default function ReservationConfirmation(props: {
   onHandleGoBack: () => void;
   onHandleGoToTop: () => void;
 }) {
+  const { setAppCommonData } = useAppCommonCtx();
   const sdkInstance = usePocketSignSDKInstanceCtx();
   const { getUserInfomation } = usePocketSignSDK(sdkInstance);
   const api = useMajinkoAPI();
 
   const handleReserve = async () => {
     if (props.userData.birthday) {
-      await api.postMajinkoReservation({
-        //client(owner) id
-        clientId: props.ownerId === "" ? "test" : props.ownerId,
-
-        //user data
-        address: props.userData.address ?? "",
-        birthDay: props.userData.birthday,
-        name: props.userData.name ?? "",
-        sex: props.userData.sex ?? "",
-        subscriptionId: props.userData.id ?? "",
-
-        //form data
-        detail: props.formData,
-      });
-      alert("予約を完了しました。");
+      // await api.postMajinkoReservation({
+      //   //client(owner) id
+      //   clientId: props.ownerId === "" ? "test" : props.ownerId,
+      //   //user data
+      //   address: props.userData.address ?? "",
+      //   birthDay: props.userData.birthday,
+      //   name: props.userData.name ?? "",
+      //   sex: props.userData.sex ?? "",
+      //   subscriptionId: props.userData.id ?? "",
+      //   //form data
+      //   detail: props.formData,
+      // });
     } else {
       alert(
         "正しいユーザーデータを取得できませんでした。テストモードで予約を実行します。"
@@ -54,6 +55,14 @@ export default function ReservationConfirmation(props: {
         detail: props.formData,
       });
     }
+    setAppCommonData((prev) => {
+      const data = {
+        ...prev,
+        reservation: { ...prev.reservation, done: true },
+      };
+      return data;
+    });
+    alert("予約を完了しました。");
     props.onHandleGoToTop();
   };
 

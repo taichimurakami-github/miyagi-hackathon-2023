@@ -110,9 +110,11 @@ export default function QREncoder(props: {
             <p>QRコードを探しています...</p>
           )}
         </div>
-        <button className="type-a mb-10" onClick={drawImagesFromMediaDevice}>
-          カメラをONにする
-        </button>
+        {!showCanvas && (
+          <button className="type-a mb-10" onClick={drawImagesFromMediaDevice}>
+            カメラをONにする
+          </button>
+        )}
         <canvas
           id="canvas"
           className="mx-auto w-full"
