@@ -5,10 +5,11 @@ import SpotAuthQRReader from "./spotauth/SpotAuthQRReader";
 import { AppUserData, AppFormData } from "../types/data";
 import SpotAuthSignUp from "./spotauth/SpotAuthSignUp";
 import SpotAuthCompletion from "./spotauth/SpotAuthCompletion";
+import SpotAuthSelphy from "./spotauth/SpotAuthSelphy";
 
 export default function SpotAuthIndex() {
   const [activeComponentId, setActiveComponentId] = useState<
-    "" | "confirmation" | "signup" | "completion"
+    "" | "confirmation" | "selphy" | "signup" | "completion"
   >("");
   const [data, setData] = useState<{
     ownerId: string;
@@ -36,6 +37,9 @@ export default function SpotAuthIndex() {
   const handleGoToSignUp = () => {
     setActiveComponentId("signup");
   };
+  const handleGoToSelphy = () => {
+    setActiveComponentId("selphy");
+  };
   const handleGoToConfirmation = () => {
     setActiveComponentId("confirmation");
   };
@@ -54,10 +58,11 @@ export default function SpotAuthIndex() {
     case "signup":
       return (
         <SpotAuthSignUp
-          onHandleGoBack={handleGoToQRReader}
+          onHandleGoBack={handleGoToSelphy}
           onHandleGoNext={handleGoToCompletion}
         />
       );
+
     case "confirmation":
       return (
         <SpotAuthConfirmation
@@ -69,12 +74,20 @@ export default function SpotAuthIndex() {
         />
       );
 
+    case "selphy":
+      return (
+        <SpotAuthSelphy
+          onHandleGoBack={handleGoToQRReader}
+          onHandleGoNext={handleGoToConfirmation}
+        />
+      );
+
     default:
       return (
         <SpotAuthQRReader
           onSetLoadedData={setOwnerId}
           onHandleGoBack={handleGoBackToTop}
-          onHandleGoNext={handleGoToConfirmation}
+          onHandleGoNext={handleGoToSelphy}
         />
       );
   }

@@ -27,7 +27,7 @@ export default function SpotAuthQRReader(props: {
           入力に戻る
         </button>
         <button className="type-b" onClick={props.onHandleGoNext}>
-          確認画面へ進む
+          写真撮影へ進む
         </button>
       </TwinButtonsContainer>
     </div>
