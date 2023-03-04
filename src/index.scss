@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$color-a: darken(#b9c6ae, 20%);
+$color-b: #6a5c57;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  background: white;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  // place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $color-b;
+  font-weight: bold;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.text {
+  $color-a: #6a5c57;
+  // $color-b: darken(#b9c6ae, 20%);
+  $color-b: #8cc63f;
+  &.type-a {
+    color: $color-a;
+  }
+
+  &.type-b {
+    color: $color-b;
+  }
+}
+
+.bgcolor {
+  $color-a: #6a5c57;
+  $color-b: darken(#b9c6ae, 20%);
+  &.type-a {
+    background-color: $color-a;
+  }
+
+  &.type-b {
+    background-color: $color-b;
+  }
+}
+
+.border {
+  &.type-a {
+    border-color: $color-a;
+  }
+
+  &.type-b {
+    border-color: $color-b;
+  }
+}
+
+button {
+  $reverse-border-px: 2px solid;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &.type-a {
+    background: $color-a;
+    color: white;
+  }
+
+  &.type-a-reverse {
+    color: $color-a;
+    background: white;
+    border: $reverse-border-px;
+  }
+
+  &.type-b {
+    background: $color-b;
+    color: white;
+  }
+
+  &.type-b-reverse {
+    color: $color-b;
+    background: white;
+    border: $reverse-border-px;
+  }
+}
+
+label {
+  select {
+    width: 90%;
+    margin: 0 auto;
+    border: 2px $color-b solid;
+    background: white;
+    padding: 4px;
+    border-radius: 5px;
+  }
+}
+
+.form-table-cell p {
+  line-height: 2rem;
+  &:first-child {
+    color: $color-b;
+  }
+}

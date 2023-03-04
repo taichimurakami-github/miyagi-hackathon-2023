@@ -1,11 +1,10 @@
 import { useRef, useState } from "react";
 import jsQR from "jsqr";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCamera, faRotateRight } from "@fortawesome/free-solid-svg-icons";
 // import QRCode from "react-qr-code";
 
-export default function QREncoder(props: {
-  title: JSX.Element;
-  onLoaded: (value: string) => void;
-}) {
+export default function Selphy(props: { onLoaded: (value: string) => void }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const msgRef = useRef<HTMLDivElement>(null);
   // const qrcodeRef = useRef<HTMLDivElement>(null);
@@ -14,11 +13,12 @@ export default function QREncoder(props: {
   // const [qrValue, setQrValue] = useState<null | string>(null);
   const detecting = useRef(false);
   const [showCanvas, setShowCanvas] = useState(false);
+  const [shotDone, setShotDone] = useState(false);
 
   const drawImagesFromMediaDevice = () => {
     if (canvasRef.current && !detecting.current) {
       const v = videoRef.current;
-      const userMedia = { video: { facingMode: "environment" } };
+      const userMedia = { video: { facingMode: "user" } };
       navigator.mediaDevices.getUserMedia(userMedia).then((stream) => {
         v.srcObject = stream;
         v.setAttribute("playsinline", "true");
@@ -57,16 +57,11 @@ export default function QREncoder(props: {
     const c = canvasRef.current;
     const v = videoRef.current;
     const m = msgRef.current;
-    // console.log(c, v, m);
 
     if (!c || !v || !m) {
       console.log("E_NO_ELEM");
       return;
     }
-
-    // if (qrValue) {
-    //   return;
-    // }
 
     const ctx = c.getContext("2d");
 
@@ -96,8 +91,10 @@ export default function QREncoder(props: {
   };
 
   return (
-    <div className="grid gap-4">
-      {props.title}
+    <div className="grid gap-10 mb-10">
+      <h2>
+        顔画像を<br></br>撮影してください
+      </h2>
       <div className="grid gap-4">
         <div id="msg" ref={msgRef}>
           {!showCanvas ? (
@@ -106,7 +103,7 @@ export default function QREncoder(props: {
               <p>カメラの使用を許可してください。</p>
             </>
           ) : (
-            <p>QRコードを探しています...</p>
+            <></>
           )}
         </div>
         {!showCanvas && (
@@ -114,6 +111,7 @@ export default function QREncoder(props: {
             カメラをONにする
           </button>
         )}
+
         <canvas
           id="canvas"
           className="mx-auto w-full"
@@ -123,8 +121,32 @@ export default function QREncoder(props: {
             width: window.innerWidth * 0.9 * 0.9,
           }}
         ></canvas>
-        {/* <div id="qrcode" ref={qrcodeRef}></div> */}
-        {/* {qrValue && <QRCode value={qrValue} size={512} />} */}
+        <button
+          className="w-[200px] p-4 text-white bg-app-brown mx-auto mt-10"
+          style={{
+            visibility: showCanvas ? "visible" : "hidden",
+          }}
+          onClick={() => {
+            if (!shotDone) {
+              detecting.current = false;
+              setShotDone(true);
+            } else {
+              detecting.current = true;
+              setShotDone(false);
+              startTick();
+            }
+          }}
+        >
+          <FontAwesomeIcon
+            className="text-4xl"
+            icon={shotDone ? faRotateRight : faCamera}
+          />
+        </button>
+        {shotDone && (
+          <p>
+            この写真でよろしければ、<br></br>次へ進んでください。
+          </p>
+        )}
       </div>
     </div>
   );
