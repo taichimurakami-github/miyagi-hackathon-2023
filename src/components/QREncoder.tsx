@@ -3,6 +3,7 @@ import jsQR from "jsqr";
 // import QRCode from "react-qr-code";
 
 export default function QREncoder(props: {
+  title: JSX.Element;
   onLoaded: (value: string) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -95,10 +96,8 @@ export default function QREncoder(props: {
   };
 
   return (
-    <div className="grid gap-10 mb-10">
-      <h1>
-        QRコードを<br></br>読み取ってください
-      </h1>
+    <div className="grid gap-4">
+      {props.title}
       <div className="grid gap-4">
         <div id="msg" ref={msgRef}>
           {!showCanvas ? (

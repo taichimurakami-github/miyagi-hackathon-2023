@@ -18,7 +18,7 @@ export default function Selphy(props: { onLoaded: (value: string) => void }) {
   const drawImagesFromMediaDevice = () => {
     if (canvasRef.current && !detecting.current) {
       const v = videoRef.current;
-      const userMedia = { video: { facingMode: "environment" } };
+      const userMedia = { video: { facingMode: "user" } };
       navigator.mediaDevices.getUserMedia(userMedia).then((stream) => {
         v.srcObject = stream;
         v.setAttribute("playsinline", "true");
@@ -92,9 +92,9 @@ export default function Selphy(props: { onLoaded: (value: string) => void }) {
 
   return (
     <div className="grid gap-10 mb-10">
-      <h1>
+      <h2>
         顔画像を<br></br>撮影してください
-      </h1>
+      </h2>
       <div className="grid gap-4">
         <div id="msg" ref={msgRef}>
           {!showCanvas ? (
@@ -138,7 +138,7 @@ export default function Selphy(props: { onLoaded: (value: string) => void }) {
           }}
         >
           <FontAwesomeIcon
-            className="fa-spin-pulse text-4xl"
+            className="text-4xl"
             icon={shotDone ? faRotateRight : faCamera}
           />
         </button>

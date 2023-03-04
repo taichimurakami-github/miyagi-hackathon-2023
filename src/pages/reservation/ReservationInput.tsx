@@ -28,16 +28,19 @@ export default function ReservationInput(props: {
 
   return (
     <div className="grid gap-4">
-      <h2 className="mb-10">{props.ownerId} の 予約フォームです</h2>
+      {/* <h2 className="mb-10">{props.ownerId} の 予約フォームです</h2> */}
+      <h2 className="mb-10">
+        青翠のまじんこ のご利用に必要な情報を入力してください
+      </h2>
       <form className="grid gap-10" onSubmit={handleSubmit(onHandleSubmit)}>
         {/* register your input into the hook by invoking the "register" function */}
 
         <label className="grid gap-2">
           宿泊プランを選んでください
           <select {...register("grade")}>
-            <option value="ume">梅</option>
-            <option value="take">竹</option>
-            <option value="matsu">松</option>
+            <option value="梅">梅</option>
+            <option value="竹">竹</option>
+            <option value="松">松</option>
           </select>
         </label>
 

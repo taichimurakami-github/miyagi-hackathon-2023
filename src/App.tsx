@@ -32,9 +32,7 @@ function App() {
   console.log(v);
   return (
     <div className="App w-screen text-center text-black">
-      <div className="w-[85%] mx-auto">
-        <RouterProvider router={createBrowserRouter(APP_ROUTES)} />
-      </div>
+      <RouterProvider router={createBrowserRouter(APP_ROUTES)} />
     </div>
   );
 }

@@ -28,7 +28,7 @@ a {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  // place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -36,6 +36,27 @@ body {
 h1 {
   font-size: 2rem;
   line-height: 1.1;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $color-b;
+  font-weight: bold;
 }
 
 button {
@@ -51,13 +72,26 @@ button {
 
 .text {
   $color-a: #6a5c57;
-  $color-b: darken(#b9c6ae, 20%);
+  // $color-b: darken(#b9c6ae, 20%);
+  $color-b: #8cc63f;
   &.type-a {
     color: $color-a;
   }
 
   &.type-b {
     color: $color-b;
+  }
+}
+
+.bgcolor {
+  $color-a: #6a5c57;
+  $color-b: darken(#b9c6ae, 20%);
+  &.type-a {
+    background-color: $color-a;
+  }
+
+  &.type-b {
+    background-color: $color-b;
   }
 }
 
@@ -114,4 +148,7 @@ label {
 
 .form-table-cell p {
   line-height: 2rem;
+  &:first-child {
+    color: $color-b;
+  }
 }

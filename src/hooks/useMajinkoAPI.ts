@@ -39,5 +39,16 @@ export default function useMajinkoAPI() {
     return await res.json();
   };
 
-  return { postMajinkoReservation, postMajinkoAuth };
+  const getMajinkoReservation = async (userid: string) => {
+    const url =
+      "https://a17qq4pyxk.execute-api.ap-northeast-1.amazonaws.com/majinko/reserveInfo";
+    const query = `?clientId=${"majinko"}&subscriptionId=${userid}`;
+    const res = await fetch(url + query, {
+      method: "GET",
+    });
+
+    return await res.json();
+  };
+
+  return { postMajinkoReservation, postMajinkoAuth, getMajinkoReservation };
 }

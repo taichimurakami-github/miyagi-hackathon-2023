@@ -4,8 +4,11 @@ import ReservationQRReader from "./reservation/ReservationQRReader";
 import ReservationInput from "./reservation/ReservationInput";
 import ReservationConfirmation from "./reservation/ReservationConfirmation";
 import { AppFormData, AppUserData } from "../types/data";
+import AppHeader from "../components/AppHeader";
+import AppMainContainer from "../components/ui/AppMainContainer";
 
 export default function ReservationIndex() {
+  const [headerTitle, setHeaderTitle] = useState("QRコード読み取り(1 / 3)");
   const [activeComponentId, setActiveComponentId] = useState<
     "" | "input" | "confirmation"
   >("");
@@ -14,7 +17,7 @@ export default function ReservationIndex() {
     formData: AppFormData;
     userData: AppUserData;
   }>({
-    ownerId: "test",
+    ownerId: "",
     formData: {},
     userData: {},
   });
@@ -35,48 +38,61 @@ export default function ReservationIndex() {
 
   // routing and handling children
   const handleGoToQRReader = () => {
+    setHeaderTitle("QRコード読み取り(1 / 3)");
     setActiveComponentId("");
   };
   const handleGoInput = () => {
+    setHeaderTitle("予約情報入力(2 / 3)");
     setActiveComponentId("input");
   };
   const handleGoConfirmation = () => {
+    setHeaderTitle("予約情報確認(3 / 3)");
     setActiveComponentId("confirmation");
   };
   const handleGoBackToTop = () => {
     navigate("/");
   };
 
-  switch (activeComponentId) {
-    case "input":
-      return (
-        <ReservationInput
-          ownerId={data.ownerId}
-          onHandleGoBack={handleGoToQRReader}
-          onHandleGoNext={handleGoConfirmation}
-          onSetFormData={setFormData}
-        />
-      );
+  const getComponent = () => {
+    switch (activeComponentId) {
+      case "input":
+        return (
+          <ReservationInput
+            ownerId={data.ownerId}
+            onHandleGoBack={handleGoToQRReader}
+            onHandleGoNext={handleGoConfirmation}
+            onSetFormData={setFormData}
+          />
+        );
 
-    case "confirmation":
-      return (
-        <ReservationConfirmation
-          ownerId={data.ownerId}
-          formData={data.formData}
-          userData={data.userData}
-          onHandleGoBack={handleGoInput}
-          onHandleGoToTop={handleGoBackToTop}
-          onSetUserData={setUserData}
-        />
-      );
+      case "confirmation":
+        return (
+          <ReservationConfirmation
+            ownerId={data.ownerId}
+            formData={data.formData}
+            userData={data.userData}
+            onHandleGoBack={handleGoInput}
+            onHandleGoToTop={handleGoBackToTop}
+            onSetUserData={setUserData}
+          />
+        );
 
-    default:
-      return (
-        <ReservationQRReader
-          onHandleGoBack={handleGoBackToTop}
-          onHandleGoNext={handleGoInput}
-          onSetLoadedQRData={setOwnerId}
-        />
-      );
-  }
+      default:
+        return (
+          <ReservationQRReader
+            ownerId={data.ownerId}
+            onHandleGoBack={handleGoBackToTop}
+            onHandleGoNext={handleGoInput}
+            onSetLoadedQRData={setOwnerId}
+          />
+        );
+    }
+  };
+
+  return (
+    <>
+      <AppHeader headerTitle={headerTitle} />
+      <AppMainContainer>{getComponent()}</AppMainContainer>
+    </>
+  );
 }
